@@ -1,5 +1,6 @@
-from fastapi import FastAPI, UploadFile, File, Form
+from fastapi import FastAPI, UploadFile, File, Form, Request
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 import os, tempfile
 from dotenv import load_dotenv
 from qdrant_client import QdrantClient
@@ -10,16 +11,7 @@ import uuid
 
 load_dotenv()
 
-from fastapi import FastAPI
-app = FastAPI(title="Legal Analysis API", max_request_body_size=2*1024*1024*1024)
-
-from fastapi import Request
-from fastapi.middleware.trustedhost import TrustedHostMiddleware
-
-@app.middleware("http")
-async def increase_upload_limit(request: Request, call_next):
-    request._body_size_limit = 2 * 1024 * 1024 * 1024  # 2 GB
-    return await call_next(request)
+app = FastAPI(title="Legal Analysis API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -122,7 +114,7 @@ async def analyze(
     
     search_filter = None
     if filter_person or filter_doctype:
-        from qdrant_client.models import Filter, FieldCondition, MatchValue, Must
+        from qdrant_client.models import Filter, FieldCondition, MatchValue
         conditions = []
         if filter_person:
             conditions.append(FieldCondition(key="person", match=MatchValue(value=filter_person)))
