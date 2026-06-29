@@ -12,6 +12,14 @@ load_dotenv()
 
 app = FastAPI(title="Legal Analysis API")
 
+from fastapi import Request
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
+
+@app.middleware("http")
+async def increase_upload_limit(request: Request, call_next):
+    request._body_size_limit = 2 * 1024 * 1024 * 1024  # 2 GB
+    return await call_next(request)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
