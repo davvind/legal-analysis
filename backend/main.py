@@ -81,7 +81,12 @@ async def upload_pdf(
         tmp_path = tmp.name
 
     try:
-        text = pymupdf4llm.to_markdown(tmp_path)
+        import fitz
+        doc = fitz.open(tmp_path)
+        text = ""
+        for page in doc:
+            text += page.get_text()
+        doc.close()
     finally:
         os.unlink(tmp_path)
 
