@@ -10,7 +10,8 @@ import uuid
 
 load_dotenv()
 
-app = FastAPI(title="Legal Analysis API")
+from fastapi import FastAPI
+app = FastAPI(title="Legal Analysis API", max_request_body_size=2*1024*1024*1024)
 
 from fastapi import Request
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
