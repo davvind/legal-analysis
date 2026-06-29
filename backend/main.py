@@ -18,6 +18,9 @@ app.add_middleware(
     allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
+    allow_credentials=False,
+    expose_headers=["*"],
+    max_age=3600,
 )
 
 openai_client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
