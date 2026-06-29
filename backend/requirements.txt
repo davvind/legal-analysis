@@ -1,0 +1,10 @@
+fastapi==0.111.0
+uvicorn==0.29.0
+python-multipart==0.0.9
+openai==1.14.3
+qdrant-client==1.9.1
+pymupdf4llm==0.0.5
+python-dotenv==1.0.1
+httpx==0.27.0
+PyMuPDF>=1.24.2
+azure-ai-documentintelligence>=1.0.0
