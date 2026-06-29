@@ -33,7 +33,7 @@ COLLECTION = "legal_docs"
 EMBED_MODEL = "text-embedding-3-large"
 EMBED_DIM = 3072
 MAX_WORDS_FIN = 400    # Qdrant/chat-søk
-MAX_WORDS_GROV = 1000  # GraphRAG
+MAX_WORDS_GROV = 1500  # GraphRAG
 MIN_WORDS = 40
 
 
