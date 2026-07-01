@@ -1,6 +1,0 @@
-openai==1.14.3
-psycopg2-binary>=2.9.9
-azure-storage-blob>=12.19.0
-azure-servicebus>=7.11.4
-azure-ai-documentintelligence>=1.0.0
-python-dotenv==1.0.1
