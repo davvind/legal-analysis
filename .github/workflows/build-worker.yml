@@ -1,0 +1,23 @@
+name: Build and push worker image
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths: [ 'worker/**', '.github/workflows/build-worker.yml' ]
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Log in to ACR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./worker
+          push: true
+          tags: ${{ secrets.ACR_LOGIN_SERVER }}/syn-worker:latest
